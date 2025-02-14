@@ -20,7 +20,7 @@ Clone the repository or copy the script to your local machine.
 Make the script executable by running:
 
 ```bash
-chmod +x .lib/work_hours_calculator.rb
+chmod +x bin/work_calculator.rb
 ```
 
 ## Usage
@@ -37,14 +37,15 @@ Run the script from the command line with the required options for start time, e
 # Example
 To calculate your work hours, run the following command:
 ```bash
-ruby ./lib/work_hours_calculator.rb -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM"
+ruby ./bin/work_calculator.rb -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM"
 ```
 
 # Expected Output
 ```bash
-Total Work Hours: 9.5 hours
-Total Break Hours: 1.5 hours
-Net Work Hours: 8.0 hours
+Total Work Decimal Hours: 9.5 hours
+Total Break Decimal Hours: 1.5 hours
+Total Break Hours: 1:30 minutes
+Net Work Decimal Hours: 8.0 hours
 ```
 
 # TODOs
