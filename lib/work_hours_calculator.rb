@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 require 'time'
 require 'optparse'
 
+# This class takes a work_start, work_end, and breaks as input,
+# and calculates the total work hours, total break hours, and net work hours.
 class WorkHoursCalculator
   def initialize(work_start, work_end, breaks)
     @work_start_time = parse_time(work_start)
@@ -31,7 +35,7 @@ class WorkHoursCalculator
   end
 end
 
-def parse_options
+def parse_options(args = ARGV)
   options = {}
   OptionParser.new do |opts|
     opts.banner = "Usage: work_calculator.rb [options]"
@@ -42,7 +46,7 @@ def parse_options
       options[:breaks] = v.map { |pair| pair.split('-') }
     end
     opts.on("-h", "--help", "Show help") { puts opts; exit }
-  end.parse!
+  end.parse!(args, into: options)
 
   if options[:start_time].nil? || options[:end_time].nil? || options[:breaks].nil?
     puts "Please provide start time, end time, and break times."
@@ -51,11 +55,3 @@ def parse_options
 
   options
 end
-
-options = parse_options
-calculator = WorkHoursCalculator.new(options[:start_time], options[:end_time], options[:breaks])
-results = calculator.calculate
-
-puts "Total Work Hours: #{results[:total_work_hours].round(2)} hours"
-puts "Total Break Hours: #{results[:total_break_hours].round(2)} hours"
-puts "Net Work Hours: #{results[:net_work_hours].round(2)} hours"

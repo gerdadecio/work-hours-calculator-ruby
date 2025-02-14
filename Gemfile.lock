@@ -1,0 +1,13 @@
+GEM
+  specs:
+    minitest (5.20.0)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.14)
+
+BUNDLED WITH
+   2.6.1
