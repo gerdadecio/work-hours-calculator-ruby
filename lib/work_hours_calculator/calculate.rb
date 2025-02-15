@@ -6,6 +6,8 @@ require "optparse"
 module WorkHoursCalculator
   class Error < StandardError; end
 
+  class InvalidTimeError < StandardError; end
+
   # This class takes a work_start, work_end, and breaks as input,
   # and calculates the total work hours, total break hours, and net work hours.
   class Calculate
@@ -13,11 +15,20 @@ module WorkHoursCalculator
       @work_start_time = parse_time(work_start)
       @work_end_time = parse_time(work_end)
       @breaks = breaks.map { |start, end_time| [parse_time(start), parse_time(end_time)] }
+
+      raise InvalidTimeError, "Work start time is invalid" if @work_start_time.nil?
+      raise InvalidTimeError, "Work end time is invalid" if @work_end_time.nil?
     end
 
     def execute
       total_work_time = @work_end_time - @work_start_time
-      total_break_time = @breaks.reduce(0) { |sum, (start, end_time)| sum + (end_time - start) }
+      total_break_time = @breaks.reduce(0) do |sum, (start, end_time)|
+        if start && end_time
+          sum + (end_time - start)
+        else
+          sum
+        end
+      end
       net_work_time = total_work_time - total_break_time
 
       {
@@ -32,6 +43,8 @@ module WorkHoursCalculator
 
     def parse_time(time_str)
       Time.parse(time_str)
+    rescue ArgumentError, TypeError
+      nil
     end
 
     def to_hours(seconds)

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
+require_relative "../test_helper"
 require "minitest/autorun"
 require "open3"
 require "csv"
-require_relative "../test_helper"
 
 class WorkCalculatorTest < Minitest::Test
   def setup
