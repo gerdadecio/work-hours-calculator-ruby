@@ -19,7 +19,7 @@ gem install work_hours_calculator
 # Example
 To calculate your work hours, run the following command:
 ```bash
-work_hours_calculator -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM"
+work_calculator -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM"
 ```
 
 ## Using CSV Input
@@ -30,11 +30,12 @@ work_start,work_end,breaks
 ```
 To calculate your work hours using a CSV file, run the following command:
 ```bash
-ruby ./bin/work_calculator.rb --csv-input path/to/your/input.csv
+work_calculator --csv-input path/to/your/input.csv
 ```
 ## Exporting Results to CSV
 You can export the results to a CSV file by specifying the --csv-output option:
-ruby ./bin/work_calculator.rb -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM" --csv-output path/to/your/output.csv
+```bash
+work_calculator -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM" --csv-output path/to/your/output.csv
 ```
 
 # Expected Output
