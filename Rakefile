@@ -1,10 +1,30 @@
 # frozen_string_literal: true
 
+require "rake"
+require "rake/clean"
 require "bundler/gem_tasks"
-require "rspec/core/rake_task"
-
-RSpec::Core::RakeTask.new(:spec)
-
 require "standard/rake"
 
-task default: %i[spec standard]
+task default: %i[test standard]
+
+# Load the version from the version file
+VERSION = File.read("lib/work_hours_calculator/version.rb")[/VERSION = "(.+)"/, 1]
+
+desc "Release the gem"
+task :release do
+  # Ensure the version is specified
+  if VERSION.nil? || VERSION.empty?
+    puts "Version number not found in lib/work_hours_calculator/version.rb"
+    exit 1
+  end
+
+  # Tag the latest commit
+  sh "git tag -a v#{VERSION} -m 'Release version #{VERSION}'"
+  sh "git push origin v#{VERSION}"
+
+  # Build the gem
+  sh "gem build work_hours_calculator.gemspec"
+
+  # Publish the gem to RubyGems
+  sh "gem push work_hours_calculator-#{VERSION}.gem"
+end
