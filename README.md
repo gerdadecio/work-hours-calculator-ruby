@@ -10,6 +10,8 @@ This is a Ruby command-line tool for calculating the total work hours, break hou
 - Calculate total work hours between start and end times.
 - Account for multiple break periods.
 - Return net work hours after subtracting break times.
+- Return net break hours.
+- Support for csv import or export.
 
 ## Installation
 
@@ -59,6 +61,10 @@ Run the script from the command line with the required options for start time, e
 | --csv-input | Specifies the CSV input file | `--csv-input path/to/your/input.csv`s |
 | --csv-output | Specifies the CSV output file | `--csv-output path/to/your/output.csv` |
 | -h or --help | Displays help instructions | `-h` |
+
+## TODOS
+- Add support for overtimes
+- Add support for daily or weekly or monthly summary for csv inputs
 
 ## Development
 
