@@ -23,11 +23,13 @@ PreCommit:
   Standard:
     enabled: true
     description: 'Running standardrb to check Ruby code style'
-    command: ['bundle', 'exec', 'standard']
-    required_executable: 'standard'
+    command: ['bundle', 'exec', 'rake', 'standard']
+    required_executable: 'standardrb'
     install_command: 'gem install standard'
     include:
       - '**/*.rb'
+    exlcude:
+      - 'lib/*/version.rb'
 #
 #  TrailingWhitespace:
 #    enabled: true
