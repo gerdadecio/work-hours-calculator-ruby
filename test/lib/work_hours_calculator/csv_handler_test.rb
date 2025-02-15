@@ -2,6 +2,7 @@
 
 require "minitest/autorun"
 require "csv"
+require_relative "../../test_helper"
 require_relative "../../../lib/work_hours_calculator/csv_handler"
 
 class WorkHoursCalculator::CSVHandlerTest < Minitest::Test

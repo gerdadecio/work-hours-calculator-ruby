@@ -1,4 +1,5 @@
 require "minitest/autorun"
+require_relative "../test_helper"
 require_relative "../../lib/work_hours_calculator"
 
 class WorkHoursCalculatorTest < Minitest::Test

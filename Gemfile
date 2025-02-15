@@ -6,9 +6,10 @@ gemspec
 
 gem "rake", "~> 13.0"
 gem "standard", "~> 1.3"
+gem "rexml", "~> 3.2"
 
 group :development, :test do
-  gem "simplecov", require: false
-  gem "simplecov-lcov", require: false  # Optional, for lcov support
-  gem "codeclimate-test-reporter", require: false
+  gem "simplecov", "~> 0.21.2", require: false
+  gem "simplecov-cobertura", "~> 1.4", require: false
+  gem "codecov", require: false
 end

@@ -7,24 +7,39 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
-
+  build:
     runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - '3.3.4'
 
+    env:
+      CI: true
+      
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.1.0' # Updated Ruby version
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
 
     - name: Install dependencies
-      run: |
-        gem install bundler
+      run:
         bundle install
 
     - name: Run tests
       run: |
-        bundle exec ruby -Ilib -e 'Dir.glob("./test/**/*_test.rb") { |file| require file }'
+        bundle exec rake test
+    
+    - name: List coverage directory
+      run: ls -R coverage
+    
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: coverage/cobertura.xml 
+        fail_ci_if_error: true

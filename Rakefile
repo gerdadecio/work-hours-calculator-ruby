@@ -5,8 +5,6 @@ require "rake/clean"
 require "bundler/gem_tasks"
 require "standard/rake"
 
-task default: %i[test standard]
-
 # Load the version from the version file
 VERSION = File.read("lib/work_hours_calculator/version.rb")[/VERSION = "(.+)"/, 1]
 
@@ -28,3 +26,10 @@ task :release do
   # Publish the gem to RubyGems
   sh "gem push work_hours_calculator-#{VERSION}.gem"
 end
+
+desc "Run the tests"
+task :test do
+  sh "bundle exec ruby -Ilib -e 'Dir.glob(\"./test/**/*_test.rb\") { |file| require file }'"
+end
+
+task default: %i[test standard]

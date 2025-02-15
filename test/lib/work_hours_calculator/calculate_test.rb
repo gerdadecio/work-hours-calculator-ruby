@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "minitest/autorun"
+require_relative "../../test_helper"
 require_relative "../../../lib/work_hours_calculator/calculate"
 require_relative "../../../lib/work_hours_calculator/parser"
 
