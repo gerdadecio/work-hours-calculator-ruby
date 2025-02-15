@@ -13,6 +13,22 @@ class WorkHoursCalculator::CalculateTest < Minitest::Test
     )
   end
 
+  def test_initialize
+    assert_equal Time.parse("9:00 AM"), @calculator.instance_variable_get(:@work_start_time)
+    assert_equal Time.parse("5:00 PM"), @calculator.instance_variable_get(:@work_end_time)
+    expected_breaks = [["12:00 PM", "12:30 PM"], ["3:00 PM", "3:15 PM"]].map { |start, end_time| [Time.parse(start), Time.parse(end_time)] }
+    assert_equal expected_breaks, @calculator.instance_variable_get(:@breaks)
+  end
+
+  def test_execute
+    result = @calculator.execute
+
+    assert_in_delta 8.0, result[:total_work_decimal_hours], 0.01
+    assert_in_delta 0.75, result[:total_break_decimal_hours], 0.01
+    assert_equal "0:45", result[:total_break_hours]
+    assert_in_delta 7.25, result[:net_work_decimal_hours], 0.01
+  end
+
   def test_total_work_hours
     results = @calculator.execute
     assert_in_delta 8.0, results[:total_work_decimal_hours], 0.01
