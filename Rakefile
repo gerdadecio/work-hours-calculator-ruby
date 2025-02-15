@@ -25,15 +25,31 @@ task :release do
   end
 
   # Build the gem
-  gem_file = "work_hours_calculator-#{VERSION}.gem"
-  if File.exist?(gem_file)
-    puts "Gem file #{gem_file} already exists. Skipping build."
-  else
+  gem_file = File.join(Dir.pwd, "work_hours_calculator-#{VERSION}.gem")
+  begin
+    if File.exist?(gem_file)
+      puts "Removing existing gem file #{gem_file}"
+      File.delete(gem_file)
+    end
     sh "gem build work_hours_calculator.gemspec"
+    unless File.exist?(gem_file)
+      raise "Failed to build gem file"
+    end
+  rescue => e
+    puts "Error building gem: #{e.message}"
+    exit 1
   end
 
   # Publish the gem to RubyGems
-  sh "gem push #{gem_file}"
+  begin
+    unless File.exist?(gem_file)
+      raise "Gem file not found: #{gem_file}"
+    end
+    sh "gem push #{gem_file}"
+  rescue => e
+    puts "Error pushing gem: #{e.message}"
+    exit 1
+  end
 end
 
 desc "Run the tests"
