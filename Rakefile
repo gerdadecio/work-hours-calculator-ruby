@@ -16,9 +16,13 @@ task :release do
     exit 1
   end
 
-  # Tag the latest commit
-  sh "git tag -a v#{VERSION} -m 'Release version #{VERSION}'"
-  sh "git push origin v#{VERSION}"
+  # Tag the latest commit if the tag doesn't already exist
+  if `git tag -l v#{VERSION}`.strip == "v#{VERSION}"
+    puts "Tag v#{VERSION} already exists. Skipping tagging."
+  else
+    sh "git tag -a v#{VERSION} -m 'Release version #{VERSION}'"
+    sh "git push origin v#{VERSION}"
+  end
 
   # Build the gem
   sh "gem build work_hours_calculator.gemspec"
