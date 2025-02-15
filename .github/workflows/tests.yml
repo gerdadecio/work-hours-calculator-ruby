@@ -27,4 +27,4 @@ jobs:
 
     - name: Run tests
       run: |
-        bundle exec ruby -Ilib test/*.rb
+        bundle exec ruby -Ilib -e 'Dir.glob("./test/**/*_test.rb") { |file| require file }'
