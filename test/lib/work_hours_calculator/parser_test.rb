@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "minitest/autorun"
 require_relative "../../test_helper"
+require "minitest/autorun"
 require_relative "../../../lib/work_hours_calculator/parser"
 
 class WorkHoursCalculator::ParserTest < Minitest::Test
@@ -48,9 +48,19 @@ class WorkHoursCalculator::ParserTest < Minitest::Test
     end
   end
 
-  def test_parse_options_help
+  def test_parse_options_help_display
     args = ["-h"]
-    assert_output(/Usage: work_calculator.rb \[options\]/) do
+    expected_output = <<~HELP
+      Usage: work_calculator.rb [options]
+          -s, --start-time START           Work start time (e.g., '9:30:00 AM')
+          -e, --end-time END               Work end time (e.g., '6:00:00 PM')
+          -b, --breaks x,y                 Break periods as comma-separated pairs (e.g., '12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM')
+              --csv-input FILE             CSV input file
+              --csv-output FILE            CSV output file
+          -h, --help                       Show help
+    HELP
+
+    assert_output(expected_output) do
       assert_raises(SystemExit) { WorkHoursCalculator::Parser.parse_options(args) }
     end
   end
