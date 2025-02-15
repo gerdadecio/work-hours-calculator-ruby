@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/f8dae8435980691b04fb/maintainability)](https://codeclimate.com/github/gerdadecio/work-hours-calculator-ruby/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/f8dae8435980691b04fb/test_coverage)](https://codeclimate.com/github/gerdadecio/work-hours-calculator-ruby/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/work_hours_calculator.svg)](https://badge.fury.io/rb/work_hours_calculator) [![Maintainability](https://api.codeclimate.com/v1/badges/f8dae8435980691b04fb/maintainability)](https://codeclimate.com/github/gerdadecio/work-hours-calculator-ruby/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/f8dae8435980691b04fb/test_coverage)](https://codeclimate.com/github/gerdadecio/work-hours-calculator-ruby/test_coverage)
 # Work Hours Calculator CLI
 
 Manually calculating work hours, breaks, and net hours in a spreadsheet can be tedious and prone to errors. To streamline the process and ensure accuracy, I created this CLI tool to handle the calculations quickly and easily.
