@@ -25,10 +25,15 @@ task :release do
   end
 
   # Build the gem
-  sh "gem build work_hours_calculator.gemspec"
+  gem_file = "work_hours_calculator-#{VERSION}.gem"
+  if File.exist?(gem_file)
+    puts "Gem file #{gem_file} already exists. Skipping build."
+  else
+    sh "gem build work_hours_calculator.gemspec"
+  end
 
   # Publish the gem to RubyGems
-  sh "gem push work_hours_calculator-#{VERSION}.gem"
+  sh "gem push #{gem_file}"
 end
 
 desc "Run the tests"
