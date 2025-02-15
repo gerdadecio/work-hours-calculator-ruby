@@ -48,13 +48,6 @@ class WorkHoursCalculator::ParserTest < Minitest::Test
     end
   end
 
-  def test_parse_options_help
-    args = ["-h"]
-    assert_output(/Usage: work_calculator.rb \[options\]/) do
-      assert_raises(SystemExit) { WorkHoursCalculator::Parser.parse_options(args) }
-    end
-  end
-
   def test_parse_options_help_display
     args = ["-h"]
     expected_output = <<~HELP
