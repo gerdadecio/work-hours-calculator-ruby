@@ -20,7 +20,7 @@ class WorkCalculatorTest < Minitest::Test
   end
 
   def test_calculate_with_arguments
-    command = "ruby ./bin/work_calculator.rb -s '9:00 AM' -e '5:00 PM' -b '12:00 PM-12:30 PM,3:00 PM-3:15 PM'"
+    command = "ruby ./bin/work_calculator -s '9:00 AM' -e '5:00 PM' -b '12:00 PM-12:30 PM,3:00 PM-3:15 PM'"
     stdout, _stderr, status = Open3.capture3(command)
     assert status.success?
     assert_includes stdout, "Total Work Decimal Hours: 8.0 hours"
@@ -30,7 +30,7 @@ class WorkCalculatorTest < Minitest::Test
   end
 
   def test_calculate_with_csv_input
-    command = "ruby ./bin/work_calculator.rb --csv-input #{@input_file}"
+    command = "ruby ./bin/work_calculator --csv-input #{@input_file}"
     stdout, _stderr, status = Open3.capture3(command)
     assert status.success?
     assert_includes stdout, "Total Work Decimal Hours: 8.0 hours"
@@ -40,7 +40,7 @@ class WorkCalculatorTest < Minitest::Test
   end
 
   def test_calculate_with_csv_output
-    command = "ruby ./bin/work_calculator.rb -s '9:00 AM' -e '5:00 PM' -b '12:00 PM-12:30 PM,3:00 PM-3:15 PM' --csv-output #{@output_file}"
+    command = "ruby ./bin/work_calculator -s '9:00 AM' -e '5:00 PM' -b '12:00 PM-12:30 PM,3:00 PM-3:15 PM' --csv-output #{@output_file}"
     _stdout, _stderr, status = Open3.capture3(command)
     assert status.success?
     assert File.exist?(@output_file)
