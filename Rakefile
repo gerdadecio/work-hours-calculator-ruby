@@ -32,4 +32,8 @@ task :test do
   sh "bundle exec ruby -Ilib -e 'Dir.glob(\"./test/**/*_test.rb\") { |file| require file }'"
 end
 
+task :audit do
+  sh "bundle exec bundle-audit check --update"
+end
+
 task default: %i[test standard]
