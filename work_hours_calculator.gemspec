@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Gerda Decio"]
   spec.email = ["contact@gerdadecio.com"]
 
-  spec.summary = "A tool to calculate work hours, break hours, and net work hours."
-  spec.description = "This gem provides a command-line tool to calculate total work hours, total break hours, and net work hours based on input times. It supports CSV input and output, including Google Sheets integration."
+  spec.summary = "A command line tool that calculates work hours, break hours, and net work hours."
+  spec.description = "This gem provides a command-line tool to calculate total work hours, total break hours, and net work hours based on input times. It supports CSV input and output."
   spec.homepage = "https://github.com/gerdadecio/work-hours-calculator-ruby"
   spec.required_ruby_version = ">= 3.1.0"
   spec.license = "MIT"
