@@ -52,6 +52,41 @@ task :release do
   end
 end
 
+desc "Update CHANGELOG.md based on commits from the last tag to the latest tag"
+task :update_changelog do
+  begin
+    tags = `git tag --sort=-v:refname`.lines.map(&:strip)
+    raise "No tags found" if tags.empty?
+    latest_tag = tags[0]
+    previous_tag = tags[1] || "HEAD"
+  rescue => e
+    puts "Error retrieving tags: #{e.message}"
+    return
+  end
+
+  date = Time.now.strftime("%Y-%m-%d")
+
+  changelog_entry = "## [#{latest_tag}] - #{date}\n\n"
+  changelog_entry += `git log #{previous_tag}..#{latest_tag} --pretty=format:"- %s"`.strip
+  changelog_entry += "\n\n"
+
+  changelog_file = "CHANGELOG.md"
+  begin
+    # Create file if it doesn't exist
+    File.write(changelog_file, "") unless File.exist?(changelog_file)
+
+    File.open(changelog_file, "r+") do |file|
+      content = file.read
+      file.rewind
+      file.write(changelog_entry + content)
+      file.flush
+    end
+  rescue => e
+    puts "Error updating changelog: #{e.message}"
+    return
+  end
+end
+
 desc "Run the tests"
 task :test do
   sh "bundle exec ruby -Ilib -e 'Dir.glob(\"./test/**/*_test.rb\") { |file| require file }'"
