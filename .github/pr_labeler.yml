@@ -1,0 +1,10 @@
+"C:docs":
+  - CHANGELOG.md
+  - CODE_OF_CONDUCT.md
+  - README.md
+  - LICENCE
+"Type: Build":
+  - Rakefile
+"Type: CI":
+  - .github/**
+  - codecov.yaml
