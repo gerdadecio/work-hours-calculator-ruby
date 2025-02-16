@@ -1,0 +1,44 @@
+name: Update Changelog
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+      - chore/github-workflow-changelog-update
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1.0'
+
+    - name: Install dependencies
+      run: bundle install
+
+    - name: Update CHANGELOG.md
+      run: |
+        TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+        DATE=$(date +'%Y-%m-%d')
+        echo "## [$TAG] - $DATE" > temp_changelog
+        echo "" >> temp_changelog
+        echo "- Description of changes" >> temp_changelog
+        echo "" >> temp_changelog
+        cat CHANGELOG.md >> temp_changelog
+        mv temp_changelog CHANGELOG.md
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions.bot'
+        git config --global user.email 'github-actions.bot@users.noreply.github.com'
+        git add CHANGELOG.md
+        git commit -m "Update CHANGELOG.md for $TAG"
+        git push origin HEAD:main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
