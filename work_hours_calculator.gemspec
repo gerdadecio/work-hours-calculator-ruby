@@ -38,4 +38,14 @@ Gem::Specification.new do |spec|
   spec.add_dependency "csv", "~> 3.1"
   spec.add_dependency "mutex_m", "~> 0.1.0"
   spec.add_development_dependency "minitest", "~> 5.14"
+  spec.post_install_message = <<~POST_INSTALL
+    Thank you for installing the Work Hours Calculator gem!
+    
+    You can set the log directory using the WORK_HOURS_LOG_DIR environment variable. If this variable is not set, the default log directory will be ~/work_hours_logs.
+    
+    Example:
+      export WORK_HOURS_LOG_DIR="/path/to/custom/log_directory"
+    
+    For more information, please refer to the README.md file.
+  POST_INSTALL
 end

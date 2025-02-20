@@ -57,6 +57,9 @@ class WorkHoursCalculator::ParserTest < Minitest::Test
           -b, --breaks x,y                 Break periods as comma-separated pairs (e.g., '12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM')
               --csv-input FILE             CSV input file
               --csv-output FILE            CSV output file
+              --log DESCRIPTION            Log work with description
+              --log-dir DIRECTORY          Directory to store log files
+              --calculate-log DATE         Calculate hours from the log file for the specified date (e.g., '2023-10-01')
           -h, --help                       Show help
     HELP
 

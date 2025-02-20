@@ -5,8 +5,9 @@ require "time"
 module WorkHoursCalculator
   class Logger
     DEFAULT_LOG_DIR = File.join(Dir.home, "work_hours_logs")
+    LOG_DIR = ENV["WORK_HOURS_LOG_DIR"] || DEFAULT_LOG_DIR
 
-    def self.log_work(description, log_dir = DEFAULT_LOG_DIR)
+    def self.log_work(description, log_dir = LOG_DIR)
       Dir.mkdir(log_dir) unless Dir.exist?(log_dir)
       log_file = File.join(log_dir, "#{Date.today}.csv")
 
