@@ -109,4 +109,19 @@ class WorkHoursCalculator::LoggerTest < Minitest::Test
     assert_equal "05:00:00 PM", result[:work_end]
     assert_equal 0, result[:breaks].size
   end
+
+  def test_get_hours_from_log_uses_current_date
+    FileUtils.mkdir_p(@log_dir)
+    log_file = File.join(@log_dir, "#{Date.today}.csv")
+    CSV.open(log_file, "w") do |csv|
+      csv << ["2025-02-01 09:00:00", "Started working"]
+      csv << ["2025-02-01 17:00:00", "End"]
+    end
+
+    result = WorkHoursCalculator::Logger.get_hours_from_log(nil, @log_dir)
+
+    assert_equal "09:00:00 AM", result[:work_start]
+    assert_equal "05:00:00 PM", result[:work_end]
+    assert_equal 0, result[:breaks].size
+  end
 end
