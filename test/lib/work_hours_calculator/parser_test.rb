@@ -5,6 +5,12 @@ require "minitest/autorun"
 require_relative "../../../lib/work_hours_calculator/parser"
 
 class WorkHoursCalculator::ParserTest < Minitest::Test
+  def test_parse_options_invalid_option
+    assert_raises(OptionParser::InvalidOption) do
+      WorkHoursCalculator::Parser.parse_options(["--invalid-option"])
+    end
+  end
+
   def test_parse_options_with_all_arguments
     args = ["-s", "9:30:00 AM", "-e", "6:00:00 PM", "-b", "12:00 PM-12:30 PM,3:00 PM-3:15 PM"]
     options = WorkHoursCalculator::Parser.parse_options(args)
@@ -52,6 +58,21 @@ class WorkHoursCalculator::ParserTest < Minitest::Test
   def test_parse_options_missing_required_arguments
     args = []
     assert_output(/Please provide start time, end time, and break times, or a CSV input file./) do
+      assert_raises(SystemExit) { WorkHoursCalculator::Parser.parse_options(args) }
+    end
+  end
+
+  def test_parse_options_valid_log_options
+    args = ["--log", "Started working on project X", "--dir", "im-a-path"]
+    options = WorkHoursCalculator::Parser.parse_options(args)
+    assert options[:log]
+    assert_equal "Started working on project X", options[:description]
+    assert_equal "im-a-path", options[:log_dir]
+  end
+
+  def test_parse_options_missing_description
+    args = ["--log"]
+    assert_output(/missing argument: --log/) do
       assert_raises(SystemExit) { WorkHoursCalculator::Parser.parse_options(args) }
     end
   end
