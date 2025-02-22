@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
     "lib/work_hours_calculator/calculate.rb",
     "lib/work_hours_calculator/parser.rb",
     "lib/work_hours_calculator/csv_handler.rb",
+    "lib/work_hours_calculator/logger.rb",
     "LICENCE",
     "README.md"
   ]

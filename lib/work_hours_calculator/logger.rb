@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "csv"
 require "date"
 require "time"
-
 module WorkHoursCalculator
   class InvalidFile < StandardError; end
 
