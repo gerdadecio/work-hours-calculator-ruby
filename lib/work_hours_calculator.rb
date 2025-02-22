@@ -2,6 +2,7 @@
 
 require_relative "work_hours_calculator/version"
 require_relative "work_hours_calculator/calculate"
+require_relative "work_hours_calculator/logger"
 
 module WorkHoursCalculator
   class Error < StandardError; end

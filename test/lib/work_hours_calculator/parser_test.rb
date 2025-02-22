@@ -48,6 +48,20 @@ class WorkHoursCalculator::ParserTest < Minitest::Test
     end
   end
 
+  def test_parse_options_with_log_description
+    args = ["--log", "Started work on feature X"]
+    options = WorkHoursCalculator::Parser.parse_options(args)
+    assert_equal "Started work on feature X", options[:description]
+    assert options[:log]
+  end
+
+  def test_parse_options_with_calculate_log
+    args = ["--calculate-log", "2025-02-01"]
+    options = WorkHoursCalculator::Parser.parse_options(args)
+    assert_equal "2025-02-01", options[:log_date]
+    assert options[:calculate_log]
+  end
+
   def test_parse_options_help_display
     args = ["-h"]
     expected_output = <<~HELP
