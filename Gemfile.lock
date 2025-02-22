@@ -19,8 +19,17 @@ GEM
       json
       simplecov
     csv (3.2.8)
+    date (3.4.1)
+    debug (1.10.0)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     docile (1.1.5)
     iniparse (1.5.0)
+    io-console (0.8.0)
+    irb (1.15.1)
+      pp (>= 0.6.0)
+      rdoc (>= 4.0.0)
+      reline (>= 0.4.2)
     json (2.10.1)
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
@@ -34,10 +43,20 @@ GEM
     parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
+    pp (0.6.2)
+      prettyprint
+    prettyprint (0.2.0)
+    psych (5.2.3)
+      date
+      stringio
     racc (1.8.1)
     rainbow (3.1.1)
     rake (13.1.0)
+    rdoc (6.12.0)
+      psych (>= 4.0.0)
     regexp_parser (2.10.0)
+    reline (0.6.0)
+      io-console (~> 0.5)
     rexml (3.4.0)
     rubocop (1.71.2)
       json (~> 2.3)
@@ -75,6 +94,7 @@ GEM
     standard-performance (1.6.0)
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.23.0)
+    stringio (3.1.4)
     thor (1.3.2)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
@@ -87,6 +107,7 @@ PLATFORMS
 DEPENDENCIES
   bundle-audit (~> 0.1.0)
   codecov
+  debug
   minitest (~> 5.14)
   overcommit (~> 0.58.0)
   rake (~> 13.0)
