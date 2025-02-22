@@ -12,6 +12,7 @@ This is a Ruby command-line tool for calculating the total work hours, break hou
 - Return net work hours after subtracting break times.
 - Return net break hours.
 - Support for csv import or export.
+- Log your work hours for the day.
 
 ## Installation
 
@@ -23,6 +24,14 @@ gem install work_hours_calculator
 To calculate your work hours, run the following command:
 ```bash
 work_calculator -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM"
+```
+
+### Expected Output
+```bash
+Total Work Decimal Hours: 9.5 hours
+Total Break Decimal Hours: 1.5 hours
+Total Break Hours: 1:30 minutes
+Net Work Decimal Hours: 8.0 hours
 ```
 
 ## Using CSV Input
@@ -40,13 +49,33 @@ You can export the results to a CSV file by specifying the --csv-output option:
 ```bash
 work_calculator -s "9:30:00 AM" -e "7:00:00 PM" -b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM" --csv-output path/to/your/output.csv
 ```
-
-# Expected Output
+## Logging Work Hours for the Day
+You can log your work hours throughout the day, much like a diary of your work. To log your work, run the following command:
 ```bash
-Total Work Decimal Hours: 9.5 hours
-Total Break Decimal Hours: 1.5 hours
-Total Break Hours: 1:30 minutes
-Net Work Decimal Hours: 8.0 hours
+work_calculator --log some-description-goes-here
+```
+Example:
+```bash
+work_calculator --log "working on an interesting project"
+# > Logged work: 2025-02-22 19:47:24 - working on an interesting project
+
+work_calculator --log "break"
+# > Logged work: 2025-02-22 19:48:11 - break
+
+work_calculator --log "end"
+# > Logged work: 2025-02-22 19:50:01 - end
+```
+Please note of the system keywords for the description: 
+- "break" : considered the record log as a break
+- "end" : considered the record log as finished or has ended work for the day.
+
+### Calculate the hours from your work log
+```bash
+work_calculator --calculate-log "2025-02-22"
+# > Total Work Decimal Hours: 3.2 hours
+# > Total Break Decimal Hours: 2.15 hours
+# > Total Break Hours: 2:09 minutes
+# > Net Work Decimal Hours: 1.05 hours
 ```
 
 ## Usage
@@ -60,7 +89,12 @@ Run the script from the command line with the required options for start time, e
 | -b or --breaks | Specifies break periods in comma-separated start_time-end_time format | `-b "12:49:00 PM-1:26:00 PM,3:42:00 PM-4:35:00 PM"` |
 | --csv-input | Specifies the CSV input file | `--csv-input path/to/your/input.csv`s |
 | --csv-output | Specifies the CSV output file | `--csv-output path/to/your/output.csv` |
+| --log DESCRIPTION | Log work with description | `--log "working on a project"` |
+| --log-dir DIRECTORY | Specify a directory to store log files | `--lod-dir` <br><br>or export it as an ENV variable so you don't have to specify the directory arg everytime. <br> `export WORK_HOURS_LOG_DIR="/some/path"`|
+| --calculate-log DATE | Calculate hours from the log file for the specified date (e.g., '2023-10-01') | `--calculate-log 2025-02-01` |
 | -h or --help | Displays help instructions | `-h` |
+
+
 
 ## TODOS
 - Add support for overtimes
