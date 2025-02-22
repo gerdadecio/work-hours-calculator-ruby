@@ -13,6 +13,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "debug"
   gem "standard", "~> 1.3"
   gem "simplecov", "~> 0.21.2", require: false
   gem "simplecov-cobertura", "~> 1.4", require: false
