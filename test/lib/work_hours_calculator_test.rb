@@ -54,10 +54,4 @@ class WorkHoursCalculatorCalculateTest < Minitest::Test
       assert_equal "1:00", hours[:total_break_hours]
     end
   end
-
-  def test_fail_calculate_hours_from_log
-    assert_raises(WorkHoursCalculator::InvalidRecord) do
-      WorkHoursCalculator.calculate_hours_from_log(nil)
-    end
-  end
 end

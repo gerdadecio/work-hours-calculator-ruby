@@ -39,8 +39,8 @@ module WorkHoursCalculator
       puts "Logged work: #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} - #{description}"
     end
 
-    def self.get_hours_from_log(date, log_dir = DEFAULT_LOG_DIR)
-      raise InvalidRecord, "Date cannot be nil" if date.nil?
+    def self.get_hours_from_log(date = Date.today, log_dir = DEFAULT_LOG_DIR)
+      date ||= Date.today
 
       log_file = File.join(log_dir, "#{date}.csv")
       unless File.exist?(log_file)
